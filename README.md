@@ -1,2 +1,2 @@
 # Dino Game
- Reprodução do "jogo do dinossauro" do google chrome.
+ Reprodução do "jogo do dinossauro" do Google Chrome.
