@@ -1,16 +1,20 @@
-body{
+body {
     background: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.dino{
-    width:60px;
+.dino {
+    width: 60px;
     height: 60px;
     position: absolute;
     bottom: 0;
     background-image: url(./images/dino.png);
+    opacity: 0;
 }
 
-.cactus{
+.cactus {
     position: absolute;
     width: 60px;
     height: 60px;
@@ -18,23 +22,35 @@ body{
     background-image: url(./images/cactus.png);
 }
 
-.game-over{
+.game-over {
     text-align: center;
     color: #666666;
     margin-top: 50px;
     font-family: arial;
 }
 
-@keyframes slideright{
+.buttonStart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+}
+
+button{
+    
+}
+
+@keyframes slideright {
     from {
         background-position: 70000%;
     }
-    to{
+
+    to {
         background-position: 0;
     }
 }
 
-.background{
+.background {
     position: absolute;
     bottom: 0;
     background-image: url(./images/background.png);
@@ -42,4 +58,5 @@ body{
     animation: slideright 100s infinite linear;
     width: 100%;
     height: 200px;
+    opacity: 0;
 }
