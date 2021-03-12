@@ -1,79 +1,67 @@
+const dino = document.querySelector('.dino')
+const background = document.querySelector('.background')
+
+let isJumping = false;
+let position = 0
+
+let divBotao = document.getElementById("divBotao")
+
+let stateCreateCactus = false
+
+let cactiHaveBeenRemoved = false;
+let botao = document.getElementById("botao")
+
+let containerPrincipal = document.getElementById("containerPrincipal")
+
 function startGame() {
-
-    // const dino = document.querySelector('.dino')
-    // const background = document.querySelector('.background')
-    let isJumping = false;
-    let position = 0
-
-    //Cria div dino e o background
-    const background = document.createElement("div")
-    
+    containerPrincipal.removeChild(divBotao)
+    // botao.parentNode.removeChild(botao)
+    stateCreateCactus = true
+    createCactus();
+}
 
 
-    //Changes dino's and background's opacities
-    function changeOpacity() {
-        if (dino.style.opacity == 0 && background.style.opacity == 0) {
-            dino.style.opacity = 1
-            background.style.opacity = 1
-        }
-    }
-    changeOpacity()
 
-
-    //Checks whether the user is pressing the space bar
-    function handleKeyDown(event) {
-        if (event.keyCode === 32 && !isJumping) {
+//Checks if the user pressed the space bar
+function handleKeyDown(event) {
+    if (event.keyCode === 32) {
+        if (!isJumping) {
             jump()
         }
     }
+}
 
-    function jump() {
+function jump() {
 
-        isJumping = true;
+    isJumping = true;
 
-        let upInterval = setInterval(function () {
-            if (position >= 150) {
-                clearInterval(upInterval)
+    let upInterval = setInterval(function () {
+        if (position >= 150) {
+            clearInterval(upInterval)
 
-                //Down
-                let downInterval = setInterval(function () {
-                    if (position <= 0) {
-                        clearInterval(downInterval)
-                        isJumping = false;
-                    } else {
-                        position -= 20
-                        dino.style.bottom = position + 'px'
-                    }
-                }, 20)
-            } else {
-                //Up
-                position += 20
-                dino.style.bottom = position + 'px'
-            }
-        }, 20)
-    }
-
-    function createCactus() {
-
-        function gameOver() {
-            clearInterval(leftInterval)
-            background.removeChild(cactus)
-            document.body.innerHTML = '<h1 class="game-over">Fim de jogo</h1>'
-            //Criar botao de play again
-            function createButton() {
-                var btn = document.createElement('BUTTON')
-                var lbl = document.createTextNode("PLAY AGAIN")
-                btn.appendChild(lbl)
-                btn.onclick = startGame()
-                document.body.appendChild(btn);
-            }
-            createButton()
-
+            //Down
+            let downInterval = setInterval(function () {
+                if (position <= 0) {
+                    clearInterval(downInterval)
+                    isJumping = false;
+                } else {
+                    position -= 20
+                    dino.style.bottom = position + 'px'
+                }
+            }, 20)
+        } else {
+            //Up
+            position += 20
+            dino.style.bottom = position + 'px'
         }
+    }, 20)
+}
 
+function createCactus() {
+    if (stateCreateCactus) {
         const cactus = document.createElement('div')
         let cactusPosition = 1000
-        let randomTime = Math.random() * 6000
+        let randomTime = Math.random() * 2000
 
         cactus.classList.add('cactus')
         cactus.style.left = 1000 + 'px'
@@ -84,19 +72,65 @@ function startGame() {
                 clearInterval(leftInterval)
                 background.removeChild(cactus)
             } else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) {
-                gameOver()
+                //Game over
+                clearInterval(leftInterval)
+                background.removeChild(cactus)
+                endGame()
+                // document.body.innerHTML = '<h1 class="game-over">Fim de jogo</h1>'
             } else {
                 cactusPosition -= 10;
                 cactus.style.left = cactusPosition + 'px'
             }
-
         }, 20)
 
         setTimeout(createCactus, randomTime)
-    }
 
-    createCactus();
-    document.addEventListener('keyup', handleKeyDown)
+    } else {
+
+    }
 }
 
-// startGame()
+// FIX HERE TO END ( RESTART GAME PART)
+
+function callStartGame() {
+    playAgain = document.getElementById("divBotao")
+    // containerPrincipal.removeChild(playAgain)
+    playAgainButton = document.getElementById("playAgainButton")
+    playAgain.removeChild(playAgainButton)
+
+
+    cactiHaveBeenRemoved = false;
+    stateCreateCactus = true;
+    startGame()
+}
+
+function endGame() {
+    if (!cactiHaveBeenRemoved) {
+        let playAgain = document.createElement("div")
+        playAgain.classList = 'playAgain'
+        playAgain.id = 'divBotao'
+        playAgain.innerHTML = "<h1> Game Over </h1>"
+        containerPrincipal.appendChild(playAgain)
+
+
+
+        let playAgainButton = document.createElement("button")
+        // playAgainButton.setAttribute('onclick', 'callStartGame()')
+        playAgainButton.classList = 'botao inicio'
+        playAgainButton.id = 'playAgainButton'
+        playAgainButton.setAttribute('type', 'button')
+        playAgainButton.appendChild(document.createTextNode('Play Again'))
+
+
+        playAgain.appendChild(playAgainButton)              
+        
+        cactiHaveBeenRemoved = true;
+        stateCreateCactus = false
+    }
+
+}
+
+
+
+
+document.addEventListener('keydown', handleKeyDown)

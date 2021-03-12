@@ -1,8 +1,83 @@
 body {
+    /* background: #fafafa; */
     background: #fafafa;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+.containerPrincipal {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100vw;
+    height: 50vw;
+    /* background-color: blue; */
+    
+}
+
+.divBotao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: yellow; */
+}
+
+.botao {
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #e74c3c;
+    border-radius: 0.6em;
+    color: #e74c3c;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.botao:hover,
+.botao:focus {
+    color: #fff;
+    outline: 0;
+}
+
+.inicio {
+    -webkit-transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.inicio:hover {
+    box-shadow: 0 0 40px 40px #e74c3c inset;
+}
+
+.playAgain {
+    display: block;
+    grid-row: inherit;
+    text-align: center;
+    font-size: 16px;
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* width: 100vw; */
+    /* height: 50vw; */
+    /* background-color: yellow; */
+
 }
 
 .dino {
@@ -11,7 +86,6 @@ body {
     position: absolute;
     bottom: 0;
     background-image: url(./images/dino.png);
-    opacity: 0;
 }
 
 .cactus {
@@ -22,23 +96,6 @@ body {
     background-image: url(./images/cactus.png);
 }
 
-.game-over {
-    text-align: center;
-    color: #666666;
-    margin-top: 50px;
-    font-family: arial;
-}
-
-.buttonStart {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 500px;
-}
-
-button{
-    
-}
 
 @keyframes slideright {
     from {
@@ -58,5 +115,4 @@ button{
     animation: slideright 100s infinite linear;
     width: 100%;
     height: 200px;
-    opacity: 0;
 }
